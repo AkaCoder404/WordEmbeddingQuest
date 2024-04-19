@@ -1,13 +1,13 @@
 
 # Word Embedding
 
-t contains helpful sources as well as some evaluations/analyzations/applications of popular pretrained embeddings as well as some scripts to train, visualize, and evaluate, embeddings on your own.
+This repository contains helpful resources about word embeddings. It also includes methods to evaluate, visualize, and apply popular pretrained embeddings. A more detailed report on my findings can be found at `.report.md`.
 
 ## Background
 Goals
-1. Use various embedding techniques to embed English words
+1. Use various embedding techniques to embed words.
 2. Project the embeddings onto the 2-D space (using tool t-SNE) and discuss observations from the visualizations
-3. Applications of word embeddings on Sentiment Analysis
+3. Applications of word embeddings on Downstream tasks like Sentiment Analysis
 
 ## Environment
 Python 3.8.18
@@ -74,7 +74,8 @@ A table.
   
 
 ## Embedding evaluations (metrics)
-First, let's look at a basic overview.
+
+### Overview
 **Analogy Datasets**
 - [WordRep](https://www.dropbox.com/sh/5k78h9gllvc44vt/AAALLQq-Bge605OIMlmGBbNJa?dl=1)
 - [Google Analogy](https://www.dropbox.com/s/eujtyfb5zem1mim/EN-GOOGLE.txt?dl=1)
@@ -98,27 +99,19 @@ First, let's look at a basic overview.
 - [ESSLI 2b](https://www.dropbox.com/sh/7gdv52gy9vb4mf2/AACExLgHdbvbBrRZBP6CcdDaa?dl=1)
 - [ESSLI 1a](https://www.dropbox.com/sh/h362565r1sk5wii/AADjcdYy3nRo-MjuFUSvb-0ya?dl=1)
 
-## Sentiment Analysis
-- [Yelp](https://www.yelp.com/dataset) - An all-purpose dataset for learning
-- [Twitter US Airline Sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) - Analyze how travelers in February 2015 expressed their feelings on Twitter
-
-**Resources**
-Here are some good resources for evalating pre-trained/trained embeddings
-- https://github.com/kudkudak/word-embeddings-benchmarks
-- https://nlp.gluon.ai/examples/word_embedding_evaluation/word_embedding_evaluation.html
-
-## Google Analogy Benchmark
+### Google Analogy Benchmark
 The google analogy benchmark has a total of 19544 questions across 14 different categories.
 ![](./images/google_analogy_cat.png)
 
-## MSR Analogy Benchmark
+### MSR Analogy Benchmark
 The MSR analogy benchmark has a total of 8000 questions across 16 categoires.
 ![](./images/msr_analogy_cat.png)
 
-A more detailed description of the benchmark cateogires can be found here.
+## Downstream Tasks
+- [Yelp](https://www.yelp.com/dataset) - An all-purpose dataset for learning
 
-## Applications
-- Sentiment Anaysis
+### Sentiment Analysis
+- [Twitter US Airline Sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) - Analyze how travelers in February 2015 expressed their feelings on Twitter
 
 ## Others
 Feel free to add to this list!
