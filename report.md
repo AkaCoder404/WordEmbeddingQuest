@@ -1,11 +1,66 @@
 # Report
-This report aims to compare different word embeddings created from different corpus and different embedding methods. We also try to visualize these embeddings using techniques such as PCA and TSNE reduction. We also measure their efficiency on downstream tasks like analogies and use popular benchmarks to see how good these embeddings. Then, we also see some use cases of these word embeddings like in 
+This report aims to compare different word embeddings created from different corpus and different embedding methods. We also try to visualize these embeddings using techniques such as PCA and TSNE reduction. We also measure their efficiency on downstream tasks like analogies and use popular benchmarks to see how good these embeddings. Then, we also see some use cases of these word embeddings like in Sentiment Analysis
+
+We mainly focus on five embedding corpus. [Daily Dailogue](http://yanran.li/dailydialog.html), [Text8](http://mattmahoney.net/dc/textdata.html), [Google News Vector](), and [GloVe Twitter 27B](). [20 News Group]()
 
 ## Environment
 This code uses Python 3.8.18. The CPU used the Intel(R) Xeon(R) Platinum 8336C CPU @ 2.30GHz.
 
 ## Visualizations
 Let's first focus on visualizing our embeddings for different corpus.
+
+### Daily Dialogue
+Daily Dialogue, when trained with a `vector_size=100`, `window=5`, `min_count=1` with gensim's `Word2Vec` function, we obtained a vocabulary size of 18683. Here is an overall visualzation of the first `n=1000` words.
+
+![alt text](./images/dailydialogue_embedding_viz.png)
+
+We can also visualize a 3D embeddings.
+
+![alt text](./images/dailydialogue3d.png)
+
+Let's visualize "good" vs "bad" and their most similar words.
+
+![alt text](./images/dailydialogue_goodbad.png)
+
+Let's try visualizing "airplane" "car", "boat", and "train".
+
+![alt text](./images/dialydialogue_airplane.png)
+
+We can also try to visualize some analogies. However Daily Dialogue performs terribly with analogies.
+
+| King - Man + Woman                               | Car - Road + Water                               | Great - Good + Bad                               |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| ![alt text](./images/dailydailogue_analogy0.png) | ![alt text](./images/dailydialogue_analogy1.png) | ![alt text](./images/dailydailogue_analogy2.png) |
+
+We see that the most similar vectors to the analogy equation word1 - word2 + word3 does not contain the correct terms.
+
+### GoogleNews
+Here, we provide some visualizations on the googlenew pretrained embeddings.
+
+Let's try visualizing "airplane" "car", "boat", and "train" with both PCA and TSNE visualization. It seems that in both cases, there is a pretty clear distinction of the four different groups. This performs much better than 
+
+![alt text](./images/googlenewsvec_airplane.png)
+
+Now let's visualize some analogy vectors.
+
+| King - Man + Woman                               | Car - Road + Water                               | Great - Good + Bad                               |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| ![alt text](./images/googlenewsvec_analogy0.png) | ![alt text](./images/googlenewsvec_analogy1.png) | ![alt text](./images/googlenewsvec_analogy2.png) |
+
+Both the first and last one perform better than Daily Dialogue, however still struggles with presenting Boat as the analogy for the middle one.
+
+Let's visualize how perplexity affects tsne.
+
+![](./images/perplexity_animation.gif)
+
+Perplexity value, which in the context of t-SNE, may be viewed as a smooth measure of the effective number of neighbors. It is related to the number of nearest neighbors that are employed in many other manifold learners (see the picture above). According to [1], it is recommended to select a value between 5 and 50. In this case, an optimal perplexity value seems to be 30.
+
+
+### 20 News Group
+LDA and LSI was performed on this dataset, so the visualizations are a bit different.
+
+> 
+
 
 ## Evaluations
 Now let's evaluate our embeddings. But, before we begin, here is some terminology.
@@ -197,11 +252,18 @@ Categoriation
 | text8           | 0.460199 | 0.435 | 0.226152 | 0.488889 | 0.8      | 0.613636 |
 | googlenews      | 0.639303 | 0.79  | 0.382527 | 0.644444 | 0.8      | 0.75     |
 
-         AP  BLESS    BATTIG  ESSLI_2c  ESSLI_2b  ESSLI_1a
-0  0.460199  0.435  0.226152  0.488889       0.8  0.613636
 ## Applications
 
 ### Sentiment Analysis on Twitter Airline Tweets
-More details can be found in `./Downstream/SA_TwitterUSAirlineTweets.ipynb`
+More details can be found in `./Downstream/SA_TwitterUSAirlineTweets.ipynb`. In this example case, whether or not different embeddings can aid in the training of a sentiment analysis.
 
-### IMBD Analysis Airline Tweets
+| Accuracy                               | Loss                                   |
+| -------------------------------------- | -------------------------------------- |
+| ![alt text](./images/downstream-1.png) | ![alt text](./images/downstream-2.png) |
+
+
+## Summary
+
+
+## Citations
+[1]: L. Maate and G. Hinton, “Visualizing data using t-SNE”, Journal of Machine Learning Research, vol. 9, pp. 2579–2605, 2008.

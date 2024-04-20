@@ -2,3 +2,5 @@ out/*
 data/*
 data
 out
+temp
+temp/*

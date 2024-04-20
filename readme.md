@@ -72,17 +72,17 @@ A table.
 - ConceptNet
 - HDC/PDC
   
-
-## Embedding evaluations (metrics)
+## Evaluations
 
 ### Overview
 **Analogy Datasets**
 - [WordRep](https://www.dropbox.com/sh/5k78h9gllvc44vt/AAALLQq-Bge605OIMlmGBbNJa?dl=1)
 - [Google Analogy](https://www.dropbox.com/s/eujtyfb5zem1mim/EN-GOOGLE.txt?dl=1)
 - [MSR Analogy](https://www.dropbox.com/s/ne0fib302jqbatw/EN-MSR.txt?dl=1)
-- [SemEval2012](https://www.dropbox.com/sh/aarqsfnumx3d8ds/AAB05Mu2HdypP0pudGrNjooaa?dl=1)
+
 
 **Similarity Datasets**
+- [SemEval2012](https://www.dropbox.com/sh/aarqsfnumx3d8ds/AAB05Mu2HdypP0pudGrNjooaa?dl=1) - SemEval2012 dataset for relational similarity [orginal](https://sites.google.com/site/semeval2012task2/home)
 - [WS353 or wordsim354]() - WS353 dataset for testing attributional and relatedness similarity
 - [SimLex999](https://www.dropbox.com/s/0jpa1x8vpmk3ych/EN-SIM999.txt?dl=1) -  SimLex999 dataset for testing attributional similarity
 - [TR9856](https://www.research.ibm.com/haifa/dept/vst/files/IBM_Debater_(R)_TR9856.v2.zip) - TR9856 dataset for testing multi-word term relatedness
@@ -100,12 +100,26 @@ A table.
 - [ESSLI 1a](https://www.dropbox.com/sh/h362565r1sk5wii/AADjcdYy3nRo-MjuFUSvb-0ya?dl=1)
 
 ### Google Analogy Benchmark
+Sources:
+
 The google analogy benchmark has a total of 19544 questions across 14 different categories.
 ![](./images/google_analogy_cat.png)
 
 ### MSR Analogy Benchmark
+Sources:
+
 The MSR analogy benchmark has a total of 8000 questions across 16 categoires.
 ![](./images/msr_analogy_cat.png)
+
+### Wordrep Benchmark
+Source: https://arxiv.org/abs/1407.1640
+
+The main task for WordRep is analogical reasoning.
+
+### SemEval2012 Benchmark
+Source: https://aclanthology.org/S12-1047/
+
+The main task for SemEval2012 is finding degree of similarity.
 
 ## Downstream Tasks
 - [Yelp](https://www.yelp.com/dataset) - An all-purpose dataset for learning
@@ -115,7 +129,3 @@ The MSR analogy benchmark has a total of 8000 questions across 16 categoires.
 
 ## Others
 Feel free to add to this list!
-
-
-
-
