@@ -24,7 +24,7 @@ Let's visualize "good" vs "bad" and their most similar words.
 
 Let's try visualizing "airplane" "car", "boat", and "train".
 
-![alt text](./images/dialydialogue_airplane.png)
+![alt text](./images/dailydialogue_airplane.png)
 
 We can also try to visualize some analogies. However Daily Dialogue performs terribly with analogies.
 
