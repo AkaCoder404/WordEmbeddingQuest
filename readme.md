@@ -51,8 +51,7 @@ Here is a list of pretrained embeddings and where you can find them. Some of the
 - [Word2Vec, Google News Embeddings](https://github.com/mmihaltz/word2vec-GoogleNews-vectors) - Word2vec embeddings (3 million 300-dimension english word vectors) trained on Google News corpus (3 billion running words)
 - [GloVe Wikipedia 2014 + Gigaword 5](https://nlp.stanford.edu/projects/glove/) - GloVe, 6B tokens, 400K vocab, uncased, 50d, 100d, 200d, & 300d vectors
 - [Glove Twitter](https://nlp.stanford.edu/projects/glove/) - GloVe, 2B tweets, 27B tokens, 1.2M vocab, uncased, 25d, 50d, 100d, & 200d vectors
-- [NLPL word embeddings repository](http://vectors.nlpl.eu/repository/) - Contains a ton of pretrained word embeddings, what corpus they were trained on, and using what algorithms
-
+- [NLPL word embeddings repository](http://vectors.nlpl.eu/repository/) - Contains a ton of pretrained word embeddings, what corpus they were trained on, algorithms, and other parameters like vectgor size, vocabulary size, algorith, and lemmatization (or lack of).
 
 A table.
 
@@ -68,22 +67,27 @@ A table.
 - Word Clouds
 
 ## Embedding Methods
-- Word2vec
-- GloVE
-- HPcA
-- morphoRNNLM
-- LexVec
+- One Hot Encoding
+- Context-Free
+  - Word2vec
+  - GloVE
+- Contextual
+  - Unidirectional
+  - Shallowly Bidirectional
+  - HPcA (High Performance Contextualized Attention-based)
+  - morphoRNNLM (Morphological Regularization Neural Network Language Model)
+  - LexVec (Lexicon-Enhanced Vector Representation)
 - ConceptNet
-- HDC/PDC
+- HDC/PDC ()
   
 ## Evaluations
+There are many basic metrics to evaluate the word embeddings.
 
 ### Overview
 **Analogy Datasets**
 - [WordRep](https://www.dropbox.com/sh/5k78h9gllvc44vt/AAALLQq-Bge605OIMlmGBbNJa?dl=1)
 - [Google Analogy](https://www.dropbox.com/s/eujtyfb5zem1mim/EN-GOOGLE.txt?dl=1)
 - [MSR Analogy](https://www.dropbox.com/s/ne0fib302jqbatw/EN-MSR.txt?dl=1)
-
 
 **Similarity Datasets**
 - [SemEval2012](https://www.dropbox.com/sh/aarqsfnumx3d8ds/AAB05Mu2HdypP0pudGrNjooaa?dl=1) - SemEval2012 dataset for relational similarity [orginal](https://sites.google.com/site/semeval2012task2/home)
@@ -125,7 +129,19 @@ Source: https://aclanthology.org/S12-1047/
 
 The main task for SemEval2012 is finding degree of similarity.
 
-## Downstream Tasks
+## Applications
+- Text Classification
+- Named Entity Recognition (NER)
+- Machine Translation
+- Information Retrieval
+- Question Answering
+- Semantic Similarity and Clustering
+- Text Generation
+- Similarity and analogy
+- Pre-training models
+- 
+
+### Downstream Tasks Dataset
 - [Yelp](https://www.yelp.com/dataset) - An all-purpose dataset for learning
 
 ### Sentiment Analysis

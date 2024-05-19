@@ -58,78 +58,70 @@ model = trainer.train()
 
 ######################################################################
 
-# # 20 News Group Json
-# # https://raw.githubusercontent.com/selva86/datasets/master/newsgroups.json
-# # https://blog.csdn.net/lwhsyit/article/details/82750218
-# loader = Loader()
-# newsgroups = loader.load_json("./data/20newsgroups.json")
+# 20 News Group Json
+# https://raw.githubusercontent.com/selva86/datasets/master/newsgroups.json
+# https://blog.csdn.net/lwhsyit/article/details/82750218
+loader = Loader()
+newsgroups = loader.load_json("./data/20newsgroups.json")
 
-# def preprocess_20newsgroup(corpus):
-#       # convert to json to list
-#     content = corpus["content"]
-#     corpus = [content[key] for key in content.keys()]  
-#     print("Corpus length", len(corpus)) 
+def preprocess_20newsgroup(corpus):
+    # convert to json to list
+    content = corpus["content"]
+    corpus = [content[key] for key in content.keys()]  
+    print("Corpus length", len(corpus)) 
      
-#     # remove emails
-#     corpus = [re.sub(r'\S*@\S*\s?', '', sent) for sent in corpus]
+    corpus = [re.sub(r'\S*@\S*\s?', '', sent) for sent in corpus] # remove emails
+    corpus = [re.sub(r'\s+', ' ', sent) for sent in corpus] # remove newline chars
+    corpus = [re.sub(r"\'", "", sent) for sent in corpus]     # remove distracting single quotes
     
-#     # remove \n
-#     corpus = [re.sub(r'\s+', ' ', sent) for sent in corpus]
+    # Tokenize each sentence into words, remove punctuations and uncessary characters
+    tokenized_sentences = [re.findall(r'\w+', sentence.lower()) for sentence in corpus]
     
-#     # remove distracting single quotes
-#     corpus = [re.sub(r"\'", "", sent) for sent in corpus]
+    # Remove stopwords
+    nltk.download('stopwords', download_dir='./data')
+    stop_words = open('./data/corpora/stopwords/english').read().splitlines()
+    stop_words.extend(['from', 'subject', 're', 'edu', 'use'])
+    tokenized_sentences = [[word for word in sentence if word not in stop_words] for sentence in tokenized_sentences]
     
-#     # Tokenize each sentence into words, remove punctuations and uncessary characters
-#     tokenized_sentences = [re.findall(r'\w+', sentence.lower()) for sentence in corpus]
+    # Bigrams and Trigrams
+    bigram = gensim.models.Phrases(tokenized_sentences, min_count=5, threshold=100)
+    # trigram = gensim.models.Phrases(bigram[tokenized_sentences], threshold=100)
     
-#     # Remove stopwords
-#     nltk.download('stopwords', download_dir='./data')
-#     stop_words = open('./data/corpora/stopwords/english').read().splitlines()
-#     stop_words.extend(['from', 'subject', 're', 'edu', 'use'])
-#     tokenized_sentences = [[word for word in sentence if word not in stop_words] for sentence in tokenized_sentences]
+    # Faster way to get a sentence clubbed as a trigram/bigram
+    bigram_mod = gensim.models.phrases.Phraser(bigram)
+    # trigram_mod = gensim.models.phrases.Phraser(trigram)
     
-#     print("Bigrams")
-#     # Bigrams and Trigrams
-#     bigram = gensim.models.Phrases(tokenized_sentences, min_count=5, threshold=100)
-#     # trigram = gensim.models.Phrases(bigram[tokenized_sentences], threshold=100)
+    # Make bigrams
+    bigram_sentences = []
+    for sentence in tqdm(tokenized_sentences):
+        bigram_sentences.append(bigram_mod[sentence])
     
-#     # Faster way to get a sentence clubbed as a trigram/bigram
-#     bigram_mod = gensim.models.phrases.Phraser(bigram)
-#     # trigram_mod = gensim.models.phrases.Phraser(trigram)
-    
-#     # Make bigrams
-#     bigram_sentences = []
-#     for sentence in tqdm(tokenized_sentences):
-#         bigram_sentences.append(bigram_mod[sentence])
-    
-#     # Lemmatization - only keep nouns, adjectives, verbs and adverbs
-#     allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']
-#     lemmitized_sentences = []
-#     nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
-#     print("Lemmatizing")
-#     for text in tqdm(bigram_sentences):
-#         text = nlp(" ".join(text))
-#         lemmitized_sentences.append([token.lemma_ for token in text if token.pos_ in allowed_postags])
+    # Lemmatization - only keep nouns, adjectives, verbs and adverbs
+    allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']
+    lemmitized_sentences = []
+    nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
+    for text in tqdm(bigram_sentences):
+        text = nlp(" ".join(text))
+        lemmitized_sentences.append([token.lemma_ for token in text if token.pos_ in allowed_postags])
 
-#     # # See trigram example
-#     # # print(trigram_mod[bigram_mod[tokenized_sentences[0]]])
-#     # return lemmitized_sentences
+    # # See trigram example
+    # # print(trigram_mod[bigram_mod[tokenized_sentences[0]]])
+    # return lemmitized_sentences
     
+    return  lemmitized_sentences
     
-#     return  lemmitized_sentences
-    
-# preprocessed_20newsgroup = preprocess_20newsgroup(newsgroups)
-# print(preprocessed_20newsgroup[0])
-# trainer = Trainer(preprocessed_20newsgroup, 
-#                 corpus_name="20newsgroup", 
-#                 embedding_method="LdaModel", 
-#                 num_topics=20,
-#                 window=5, 
-#                 min_count=1, 
-#                 workers=4,
-#                 save_corpus=True
-# )
-# model = trainer.train()
+preprocessed_20newsgroup = preprocess_20newsgroup(newsgroups)
+print(preprocessed_20newsgroup[0])
+trainer = Trainer(preprocessed_20newsgroup, 
+                corpus_name="20newsgroup", 
+                embedding_method="LdaModel", 
+                num_topics=20,
+                window=5, 
+                min_count=1, 
+                workers=4,
+                save_corpus=True
+)
+model = trainer.train()
 
 ######################################################################
 
