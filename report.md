@@ -37,7 +37,7 @@ We see that the most similar vectors to the analogy equation word1 - word2 + wor
 ### GoogleNews
 Here, we provide some visualizations on the googlenew pretrained embeddings.
 
-Let's try visualizing "airplane" "car", "boat", and "train" with both PCA and TSNE visualization. It seems that in both cases, there is a pretty clear distinction of the four different groups. This performs much better than 
+Let's try visualizing "airplane" "car", "boat", and "train" with both PCA and TSNE visualization. It seems that in both cases, there is a pretty clear distinction of the four different groups. This performs much better than the embeddings trained on the Daily Dialogue dataset.
 
 ![alt text](./images/googlenewsvec_airplane.png)
 
@@ -72,12 +72,13 @@ Now let's evaluate our embeddings. But, before we begin, here is some terminolog
 
 ##  Google Analogy Benchmark
 Here, we compare embeddings on the google analogy benchmark.
-
+```
 dailydialog (word2vec, 100d, 5w, 5k) - 203 total correct
 dailydialog (word2vec, 300d, 5w, 5k) - 182 total correct
 text8 (word2vec, 100d, 5w, 5k) - 649 total correct
 googlenewsvector (word2vec, 300d, 5w, 5k) - 1858 total correct
 glovetwitter (glove, 100d) - 
+```
 
 ### dailydialog (word2vec, 100d, 5w, 5k)
 ```shell
@@ -155,7 +156,7 @@ text8 does considerably better than dailydialog, able to handle a lot more gramm
 googlenewsvector does alot better with a much bigger size. dailydialog trained embeddings has a dictionary size of only 18,683 compared to googlenewsvector of 3,000,000.
 
 
-## MSR Analogy Bencharmk
+## MSR Analogy Benchmark
 Again, dailydialog performs very poorly on syntatic analogies.
 
 ```sh

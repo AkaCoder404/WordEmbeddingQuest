@@ -1,7 +1,11 @@
 
 # Word Embedding
 
-This repository contains helpful resources about word embeddings. It also includes methods to evaluate, visualize, and apply popular pretrained embeddings. A more detailed report on my findings can be found at `.report.md`.
+This repository contains helpful resources about word embeddings. It also includes methods to evaluate, visualize, and apply popular pretrained embeddings. A more detailed report on my findings can be found at `.report.md`. 
+
+## Related
+- [Topic Modeling Note]()
+- [Document Classification]()
 
 ## Background
 Goals
